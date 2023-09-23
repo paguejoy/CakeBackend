@@ -13,7 +13,7 @@ const cakeSchema = new mongoose.Schema({
 	},
     image: {
 		type: String,
-		required: [true, "image is required"]
+		default: null
 	},
 	difficulty: {
 		type: String,
@@ -48,15 +48,12 @@ const cakeSchema = new mongoose.Schema({
         default: undefined
     },
     ingredients: {
-		type: String,
+		type: [String],
 		default: undefined
 	},
-    method: [
-        {
-            type: String,
-            default: undefined
-        }
-    ]
+    method: {
+		type: Array
+	}
 })
 
 module.exports = mongoose.model("Cake", cakeSchema);

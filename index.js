@@ -6,7 +6,8 @@ const dotenv = require('dotenv').config();
 const cors = require('cors');
 
 //import router module
-// const userRoute = require('./routes/userRoute');
+const userRoute = require('./routes/userRoute');
+const cakeRoute = require('./routes/cakeRoute');
 
 // DB Connection
 mongoose.connect(process.env.MONGO_URL, 
@@ -20,17 +21,17 @@ db.once('open', () => console.log(`Connected to Database`));
 
 
 
-// app.use(express.json())
-// app.use(express.urlencoded({extended:true}))
+app.use(express.json())
+app.use(express.urlencoded({extended:true}))
 app.use(cors())
 
 
-
-app.get("/", (req, res)=> console.log("hello"));
+// app.get("/", (req, res)=> res.send("hello"));
 
 
 //connect router module
-// app.use("api/user", userRoute);
+app.use("/api/user", userRoute);
+app.use("/api/cake", cakeRoute);
 
 
-app.listen(() => console.log(`Server running at port ${PORT}`));
+app.listen(PORT, () => console.log(`Server running at port ${PORT}`));
