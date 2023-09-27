@@ -96,13 +96,21 @@ module.exports.login = async (req, res) => {
             //     __v: 0
             // }
 
-        if(!user){
+        if(user){
+            if(user.password == req.body.password){
+                res.send(user)
+            } else if(user.password !== password){
+                res.send({
+                    message: "Incorrect Password. Please try again."
+                })
+            }
+        } else {
             res.send({
                 message: "User does not exists. Please register first!"
             })
         }
 
-        res.send(user)
+        
 
 
    }catch(error){
