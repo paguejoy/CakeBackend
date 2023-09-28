@@ -97,9 +97,14 @@ module.exports.login = async (req, res) => {
             // }
 
         if(user){
-            if(user.password == req.body.password){
+
+            let pw  = CryptoJS.AES.decrypt(user.password, process.env.SECRET_KEY);
+            let decryptedPassword = JSON.parse(pw.toString(CryptoJS.enc.Utf8));
+
+            if(decryptedPassword == req.body.password){
                 res.send(user)
-            } else if(user.password !== password){
+
+            } else if(decryptedPassword !== req.body.password){
                 res.send({
                     message: "Incorrect Password. Please try again."
                 })

@@ -1,11 +1,11 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 4000;
 const dotenv = require('dotenv').config();
 const cors = require('cors');
 
-//import router module
+// import router module
 const userRoute = require('./routes/userRoute');
 const cakeRoute = require('./routes/cakeRoute');
 
@@ -23,15 +23,7 @@ db.once('open', () => console.log(`Connected to Database`));
 
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
-
-
-const corsOptions ={
-    origin:'http://localhost:5173/', 
-    credentials:true,            //access-control-allow-credentials:true
-    optionSuccessStatus:200
-}
-
-app.use(cors(corsOptions))
+app.use(cors())
 
 
 // app.get("/", (req, res)=> res.send("hello"));
